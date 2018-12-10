@@ -1,0 +1,87 @@
+apply plugin: 'com.android.library'
+
+def gitCommitCount = "git rev-list HEAD --count".execute().text.trim()
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkV
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkV
+        targetSdkVersion rootProject.ext.targetSdkV
+        versionCode rootProject.ext.codeV
+        versionName "${rootProject.ext.versionName}"
+        multiDexEnabled rootProject.ext.multiDexMergeEnabled
+        testInstrumentationRunner "${rootProject.ext.testRunner}"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            versionNameSuffix ".${gitCommitCount}"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force "com.google.code.findbugs:jsr305:${rootProject.ext.findBugsV}"
+    }
+
+    compileOptions {
+        sourceCompatibility = "${rootProject.sourceCompatibilityV}"
+        targetCompatibility = "${rootProject.targetCompatibilityV}"
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Default Testing
+    testImplementation "junit:junit:${rootProject.ext.junitV}"
+    androidTestImplementation "com.android.support.test:runner:${rootProject.ext.runnerV}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.ext.esspressoV}"
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:${rootProject.ext.daggerV}"
+    implementation "com.google.dagger:dagger-android:${rootProject.ext.daggerV}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${rootProject.ext.daggerV}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.ext.daggerV}"
+
+    //LifeCycle
+    implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.lifecycleV}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:${rootProject.ext.lifecycleV}"
+    implementation "androidx.lifecycle:lifecycle-livedata:${rootProject.ext.lifecycleV}"
+    implementation "androidx.lifecycle:lifecycle-runtime:${rootProject.ext.lifecycleV}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${rootProject.ext.lifecycleV}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.lifecycleV}"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:${rootProject.ext.lifecycleV}"
+    testImplementation "androidx.arch.core:core-testing:${rootProject.ext.lifecycleV}"
+
+    //Room
+    implementation "androidx.room:room-runtime:${rootProject.ext.roomV}"
+    annotationProcessor "androidx.room:room-compiler:${rootProject.ext.roomV}"
+    implementation "androidx.room:room-rxjava2:${rootProject.ext.roomV}"
+    implementation "androidx.room:room-guava:${rootProject.ext.roomV}"
+    implementation "androidx.room:room-coroutines:${rootProject.ext.roomV}"
+    testImplementation "androidx.room:room-testing:${rootProject.ext.roomV}"
+
+    //Data
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.retrofitLoggerV}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitV}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidV}"
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJavaV}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitGsonConverterV}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofirRxJavaConverterV}"
+
+    //Android X
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.appCompatV}"
+    implementation "androidx.cardview:cardview:${rootProject.ext.appCompatV}"
+    implementation "androidx.annotation:annotation:${rootProject.ext.appCompatV}"
+    implementation "androidx.fragment:fragment:${rootProject.ext.appCompatV}"
+
+    //Support
+    implementation "androidx.multidex:multidex:${rootProject.ext.multiDexMergsV}"
+    implementation "androidx.multidex:multidex-instrumentation:${rootProject.ext.multiDexMergsV}"
+
+}
