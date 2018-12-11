@@ -4,48 +4,63 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 //TODO: NOT COMPLETED YET
 public class BaseDaoRepository<E> {
 
-    private BaseDao<E> dao;
+    @Inject
+    DaoManager<E> manager;
     private CompositeDisposable compositeDisposable;
     private DaoRepositoryCallback<List<E>> listCallback;
     private DaoRepositoryCallback<E> contentCallback;
 
     @Inject
-    public BaseDaoRepository(BaseDao<E> dao) {
-        this.dao = dao;
+    public BaseDaoRepository(DaoManager<E> manager) {
+        this.manager = manager;
         this.compositeDisposable = new CompositeDisposable();
     }
 
     public void getAllContents(String query) {
-        if (dao != null) {
-            Disposable allContentDisposable = dao
+        if (manager != null) {
+            Disposable allContentDisposable = manager
                     .getAllContents(query)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             this::onAllContentsSuccess,
-                            this::onAllContentsFailed);
+                            this::onAllContentsFailed
+                    );
             compositeDisposable.add(allContentDisposable);
         }
     }
 
     public void getContentById(String query) {
-        if (dao != null) {
-            Disposable contentDisposable = dao
+        if (manager != null) {
+            Disposable contentDisposable = manager
                     .getContentById(query)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             this::onContentSuccess,
-                            this::onContentError);
+                            this::onContentError
+                    );
             compositeDisposable.add(contentDisposable);
+        }
+    }
+
+    public void deleteContent(E content) {
+        if (manager != null) {
+            Disposable deleteContentDisposable =  manager
+                    .deleteContent(content)
+                    .subscribe();
+            compositeDisposable.add(deleteContentDisposable);
+        }
+    }
+
+    public void insertContent(E content) {
+        if (manager != null) {
+            Disposable insertDisposable =  manager
+                    .insertContent(content)
+                    .subscribe();
+            compositeDisposable.add(insertDisposable);
         }
     }
 

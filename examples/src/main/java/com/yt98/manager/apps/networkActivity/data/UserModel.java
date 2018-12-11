@@ -1,4 +1,4 @@
-package com.yt98.manager.apps.data;
+package com.yt98.manager.apps.networkActivity.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

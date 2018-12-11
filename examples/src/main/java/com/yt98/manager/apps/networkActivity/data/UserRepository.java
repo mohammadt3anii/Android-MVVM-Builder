@@ -1,13 +1,13 @@
-package com.yt98.manager.apps.data;
+package com.yt98.manager.apps.networkActivity.data;
 
-import com.yt98.manager.android_builder.network.rest.BaseSingleRepository;
+import com.yt98.manager.android_builder.network.rest.BaseRepository;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
 
-public class UserRepository extends BaseSingleRepository<UserModel, UserApi> {
+public class UserRepository extends BaseRepository<UserModel, UserApi> {
 
     private Observable<Response<UserModel>> userObservable;
     private UserApi userApi;

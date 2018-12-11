@@ -1,5 +1,7 @@
 package com.yt98.manager.android_builder.local;
 
+import org.intellij.lang.annotations.Flow;
+
 import java.util.List;
 
 import androidx.room.Delete;
@@ -21,8 +23,8 @@ public interface BaseDao<E> {
     Flowable<E> getContentById(String query);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Void insertContent(E content);
+    Flowable<Void> insertContent(E content);
 
     @Delete
-    Void deleteContent(E content);
+    Flowable<Void> deleteContent(E content);
 }

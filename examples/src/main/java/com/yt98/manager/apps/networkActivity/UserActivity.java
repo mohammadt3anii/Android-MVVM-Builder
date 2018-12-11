@@ -1,4 +1,4 @@
-package com.yt98.manager.apps;
+package com.yt98.manager.apps.networkActivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +10,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.yt98.manager.android_builder.base.BaseView;
 import com.yt98.manager.android_builder.ui.activity.BaseNetworkActivity;
-import com.yt98.manager.apps.data.UserModel;
+import com.yt98.manager.apps.R;
+import com.yt98.manager.apps.networkActivity.data.UserModel;
 
 import javax.inject.Inject;
 
@@ -37,6 +38,10 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         registry = new LifecycleRegistry(this);
         registry.markState(Lifecycle.State.CREATED);
 
+
+        /**
+         * Replace This with Butterknife or DataBinding
+         */
         loader = findViewById(R.id.loading);
         image = findViewById(R.id.image);
         name = findViewById(R.id.name);
@@ -55,12 +60,7 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
                     .load(user.getAvatarUrl())
                     .into(image);
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        registry.markState(Lifecycle.State.STARTED);
 
         /**
          * Here The View Tell ViewModel To Start Get User Info
@@ -83,7 +83,7 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         super.onResume();
         registry.markState(Lifecycle.State.RESUMED);
         if (model != null) {
-            model.onResume();
+            model.onResume((UserView) reAttachView());
         }
     }
 

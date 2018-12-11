@@ -1,12 +1,12 @@
-package com.yt98.manager.apps;
+package com.yt98.manager.apps.networkActivity;
 
 import com.yt98.manager.android_builder.base.BaseViewModel;
 import com.yt98.manager.android_builder.network.rest.ResponseCallback;
-import com.yt98.manager.apps.dagger.DaggerUserComponent;
-import com.yt98.manager.apps.dagger.UserComponent;
-import com.yt98.manager.apps.dagger.UserRepoModule;
-import com.yt98.manager.apps.data.UserModel;
-import com.yt98.manager.apps.data.UserRepository;
+import com.yt98.manager.apps.networkActivity.dagger.DaggerUserComponent;
+import com.yt98.manager.apps.networkActivity.dagger.UserComponent;
+import com.yt98.manager.apps.networkActivity.dagger.UserRepoModule;
+import com.yt98.manager.apps.networkActivity.data.UserModel;
+import com.yt98.manager.apps.networkActivity.data.UserRepository;
 
 import javax.inject.Inject;
 

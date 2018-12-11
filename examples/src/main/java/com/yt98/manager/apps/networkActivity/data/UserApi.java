@@ -1,4 +1,4 @@
-package com.yt98.manager.apps.data;
+package com.yt98.manager.apps.networkActivity.data;
 
 import io.reactivex.Observable;
 import retrofit2.Response;

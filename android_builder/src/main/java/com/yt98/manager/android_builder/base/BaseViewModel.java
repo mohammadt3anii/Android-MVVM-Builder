@@ -3,7 +3,6 @@ package com.yt98.manager.android_builder.base;
 import android.os.Parcelable;
 import android.util.Log;
 
-import com.yt98.manager.android_builder.base.impl.BaseViewModelImpl;
 import com.yt98.manager.android_builder.network.rest.ResponseCallback;
 
 import java.lang.ref.WeakReference;
@@ -14,7 +13,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
-public abstract class BaseViewModel<View extends BaseView , Model extends Parcelable> extends ViewModel implements BaseViewModelImpl {
+public abstract class BaseViewModel<View extends BaseView, Model extends Parcelable> extends ViewModel
+        implements BaseViewModelImpl<View> {
 
     public static final String TAG = "BaseViewModelTAG";
 
@@ -73,11 +73,10 @@ public abstract class BaseViewModel<View extends BaseView , Model extends Parcel
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
-    public void onResume() {
+    public void onResume(View view) {
         if (viewLifeCycle != null) {
             if (viewLifeCycle.getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
-                setView((View) getView().reAttachView());
-
+                setView(view);
             }
         }
     }

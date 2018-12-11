@@ -19,8 +19,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private FragmentManager manager;
     private static ProgressDialog dialog;
-    private static AlertDialog.Builder builder;
-    private static AlertDialog alert;
 
 
     protected void startScreen(Context context, Class<?> target, boolean isFinishedEnabled) {

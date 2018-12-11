@@ -1,6 +1,6 @@
-package com.yt98.manager.apps.dagger;
+package com.yt98.manager.apps.networkActivity.dagger;
 
-import com.yt98.manager.apps.data.UserRepository;
+import com.yt98.manager.apps.networkActivity.data.UserRepository;
 
 import dagger.Module;
 import dagger.Provides;
