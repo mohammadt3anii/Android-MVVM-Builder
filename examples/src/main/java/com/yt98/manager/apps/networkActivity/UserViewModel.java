@@ -1,7 +1,7 @@
 package com.yt98.manager.apps.networkActivity;
 
 import com.yt98.manager.android_builder.base.BaseViewModel;
-import com.yt98.manager.android_builder.network.rest.ResponseCallback;
+import com.yt98.manager.android_builder.network.rest.normalRepository.ResponseCallback;
 import com.yt98.manager.apps.networkActivity.dagger.DaggerUserComponent;
 import com.yt98.manager.apps.networkActivity.dagger.UserComponent;
 import com.yt98.manager.apps.networkActivity.dagger.UserRepoModule;

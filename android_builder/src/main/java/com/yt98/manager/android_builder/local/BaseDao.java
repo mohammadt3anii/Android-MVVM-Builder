@@ -1,5 +1,7 @@
 package com.yt98.manager.android_builder.local;
 
+import com.yt98.manager.android_builder.base.ClassInfo;
+
 import org.intellij.lang.annotations.Flow;
 
 import java.util.List;
@@ -14,6 +16,12 @@ import io.reactivex.Flowable;
  * Base Data Access Object for Room
  * @param <E> Entity
  */
+
+@ClassInfo(
+        version = 1,
+        created = "11/11/2018",
+        createdBy = "Yazan98"
+)
 public interface BaseDao<E> {
 
     @RawQuery

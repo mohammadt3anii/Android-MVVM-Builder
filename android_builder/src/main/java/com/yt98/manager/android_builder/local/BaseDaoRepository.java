@@ -1,5 +1,7 @@
 package com.yt98.manager.android_builder.local;
 
+import com.yt98.manager.android_builder.base.ClassInfo;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +10,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 //TODO: NOT COMPLETED YET
+
+@ClassInfo(
+        version = 1,
+        created = "11/11/2018",
+        createdBy = "Yazan98"
+)
 public class BaseDaoRepository<E> {
 
     @Inject

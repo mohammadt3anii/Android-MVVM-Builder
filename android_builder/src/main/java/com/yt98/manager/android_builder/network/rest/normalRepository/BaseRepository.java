@@ -1,7 +1,9 @@
-package com.yt98.manager.android_builder.network.rest;
+package com.yt98.manager.android_builder.network.rest.normalRepository;
 
 import android.os.Parcelable;
 import android.util.Log;
+
+import com.yt98.manager.android_builder.base.ClassInfo;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,6 +16,19 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * BaseRepository root for all classes will send any request to backend and get response using rxJava2
+ * @param <Model> the model of the Requests
+ * @param <Api> the Service that have the url's and method type
+ *
+ *             make sure you call destroyRepo() to clear the observable from CompositeDisposable
+ */
+
+@ClassInfo(
+        version = 1,
+        created = "11/11/2018",
+        createdBy = "Yazan98"
+)
 public abstract class BaseRepository<Model extends Parcelable , Api> {
 
     public static final String TAG = "BaseRepository";

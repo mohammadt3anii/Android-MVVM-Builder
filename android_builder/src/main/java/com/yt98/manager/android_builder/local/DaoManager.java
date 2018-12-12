@@ -1,5 +1,7 @@
 package com.yt98.manager.android_builder.local;
 
+import com.yt98.manager.android_builder.base.ClassInfo;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +10,13 @@ import javax.inject.Singleton;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+@ClassInfo(
+        version = 1,
+        created = "11/11/2018",
+        createdBy = "Yazan98"
+)
+
 
 @Singleton
 public class DaoManager<E> {

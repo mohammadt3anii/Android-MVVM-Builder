@@ -1,6 +1,6 @@
 package com.yt98.manager.apps.networkActivity.data;
 
-import com.yt98.manager.android_builder.network.rest.BaseRepository;
+import com.yt98.manager.android_builder.network.rest.normalRepository.BaseRepository;
 
 import javax.inject.Inject;
 

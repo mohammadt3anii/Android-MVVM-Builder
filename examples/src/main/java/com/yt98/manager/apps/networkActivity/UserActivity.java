@@ -50,7 +50,7 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         if (model == null) {
             model = getViewModel();
             model.setView(this);
-            model.setViewLifeCycle(registry);
+            model.setViewLifeCycle(getRegistry());
         }
 
         model.getUser().observe(this, user -> {
@@ -76,6 +76,10 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         if (model != null) {
             model.onStop();
         }
+    }
+
+    public LifecycleRegistry getRegistry() {
+        return registry;
     }
 
     @Override

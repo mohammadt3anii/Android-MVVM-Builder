@@ -3,7 +3,7 @@ package com.yt98.manager.android_builder.base;
 import android.os.Parcelable;
 import android.util.Log;
 
-import com.yt98.manager.android_builder.network.rest.ResponseCallback;
+import com.yt98.manager.android_builder.network.rest.normalRepository.ResponseCallback;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -13,6 +13,29 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 
+/**
+ * RootViewModel for any ViewModel in the Project to include the status of {@BaseView}
+ * Manage the ViewModel
+ *
+ * @param <View> for each Screen
+ * @param <Model> for each ViewModel
+ *
+ *               make sure you send the {@BaseView} to ViewModel to handle the Operations between view and model
+ *               also send the {@Lifecycle} for each View to tell the ViewModel what is the status of his View
+ *
+ *               the initialize for the ViewModel like this
+ *
+ *               model = getViewModel();
+ *               model.setView(this);
+ *               model.setViewLifeCycle(getRegistry());
+ *
+ */
+
+@ClassInfo(
+        version = 1,
+        created = "11/11/2018",
+        createdBy = "Yazan98"
+)
 public abstract class BaseViewModel<View extends BaseView, Model extends Parcelable> extends ViewModel
         implements BaseViewModelImpl<View> {
 

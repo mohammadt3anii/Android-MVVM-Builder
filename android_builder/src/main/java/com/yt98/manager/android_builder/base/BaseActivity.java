@@ -13,6 +13,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+/**
+ * This Class is the Root For the Activities that support MVVM Library
+ *
+ * just Support AndroidX
+ */
+
+@ClassInfo(
+        version = 1,
+        created = "11/11/2018",
+        createdBy = "Yazan98"
+)
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Intent intent;
