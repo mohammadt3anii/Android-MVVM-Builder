@@ -71,7 +71,9 @@ public abstract class BaseMultiRepository<Api, Model> {
     private OkHttpClient getClient() {
         interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build();
         return client;
     }
 
@@ -185,6 +187,16 @@ public abstract class BaseMultiRepository<Api, Model> {
 
     public void setCallback(MultiRepositoryCallback<Model> callback) {
         this.callback = callback;
+    }
+
+    protected void destroyRepo() {
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
+
+        if (requests != null) {
+            requests = null;
+        }
     }
 
     /**

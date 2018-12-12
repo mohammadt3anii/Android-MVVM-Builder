@@ -37,7 +37,7 @@ import androidx.lifecycle.ViewModel;
         createdBy = "Yazan98"
 )
 public abstract class BaseViewModel<View extends BaseView, Model extends Parcelable> extends ViewModel
-        implements BaseViewModelImpl<View> {
+        implements BaseViewModelImpl {
 
     public static final String TAG = "BaseViewModelTAG";
 
@@ -94,12 +94,11 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
         this.viewLifeCycle = viewLifeCycle;
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
-    public void onResume(View view) {
+    public void onResume(BaseView view) {
         if (viewLifeCycle != null) {
             if (viewLifeCycle.getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
-                setView(view);
+                setView((View) view);
             }
         }
     }

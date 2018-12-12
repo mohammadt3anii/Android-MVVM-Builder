@@ -7,11 +7,11 @@ package com.yt98.manager.android_builder.base;
         created = "11/11/2018",
         createdBy = "Yazan98"
 )
-public interface BaseViewModelImpl<View extends BaseView> {
+public interface BaseViewModelImpl {
 
     void onDestroy();
 
-    void onResume(View view);
+    void onResume(BaseView view);
 
     void onStop();
 
