@@ -1,7 +1,7 @@
 package com.yt98.manager.android_builder.ui.activity;
 
 import com.yt98.manager.android_builder.base.BaseActivity;
-import com.yt98.manager.android_builder.base.ClassInfo;
+import com.yt98.manager.android_builder.utils.ClassInfo;
 
 @ClassInfo(
         version = 1,

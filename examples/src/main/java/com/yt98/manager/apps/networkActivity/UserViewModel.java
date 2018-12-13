@@ -1,7 +1,8 @@
 package com.yt98.manager.apps.networkActivity;
 
 import com.yt98.manager.android_builder.base.BaseViewModel;
-import com.yt98.manager.android_builder.network.rest.normalRepository.ResponseCallback;
+import com.yt98.manager.android_builder.utils.StateType;
+import com.yt98.manager.android_builder.network.callback.ResponseCallback;
 import com.yt98.manager.apps.networkActivity.dagger.DaggerUserComponent;
 import com.yt98.manager.apps.networkActivity.dagger.UserComponent;
 import com.yt98.manager.apps.networkActivity.dagger.UserRepoModule;
@@ -12,7 +13,7 @@ import javax.inject.Inject;
 
 import androidx.lifecycle.MutableLiveData;
 
-public class UserViewModel extends BaseViewModel<UserView , UserModel> {
+public class UserViewModel extends BaseViewModel<UserView, UserModel> {
 
     @Inject
     UserRepository repository;
@@ -24,14 +25,26 @@ public class UserViewModel extends BaseViewModel<UserView , UserModel> {
         repository = getComponent().getUserRepository();
     }
 
-    public void getUserInfo() {
-        if (getUser().getValue() != null) {
-            if(getViewStatus()){
+    @Override
+    protected void initialViewModelState(StateType state) {
+        if(state == StateType.INITIAL_STATE){
+            sendGetUserRequest();
+        }
+    }
+
+    public void getUserInfo(StateType state) {
+        if (state == StateType.CURRENT_STATE) {
+            if (getViewStatus()) {
                 getView().onSuccess(getUser().getValue());
+                return;
             }
-            return;
+        } else if (state == StateType.NEW_STATE) {
+            sendGetUserRequest();
         }
 
+    }
+
+    private void sendGetUserRequest(){
         if (getViewStatus()) {
             getView().showLoading();
         }

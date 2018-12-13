@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import com.yt98.manager.android_builder.base.BaseActivity;
 import com.yt98.manager.android_builder.base.BaseView;
 import com.yt98.manager.android_builder.base.BaseViewModel;
-import com.yt98.manager.android_builder.base.ClassInfo;
+import com.yt98.manager.android_builder.utils.ClassInfo;
 
 import androidx.lifecycle.LifecycleOwner;
 

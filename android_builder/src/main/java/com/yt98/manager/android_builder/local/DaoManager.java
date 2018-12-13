@@ -1,6 +1,6 @@
 package com.yt98.manager.android_builder.local;
 
-import com.yt98.manager.android_builder.base.ClassInfo;
+import com.yt98.manager.android_builder.utils.ClassInfo;
 
 import java.util.List;
 

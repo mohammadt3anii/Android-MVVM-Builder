@@ -1,8 +1,9 @@
-package com.yt98.manager.android_builder.network.rest.multiRepository;
+package com.yt98.manager.android_builder.network;
 
 
-import com.yt98.manager.android_builder.base.ClassInfo;
-import com.yt98.manager.android_builder.ui.utils.LogLevel;
+import com.yt98.manager.android_builder.utils.ClassInfo;
+import com.yt98.manager.android_builder.network.callback.MultiRepositoryCallback;
+import com.yt98.manager.android_builder.utils.LogLevel;
 import com.yt98.manager.android_builder.ui.utils.LogUtils;
 
 import java.util.Queue;
@@ -159,7 +160,8 @@ public abstract class BaseMultiRepository<Api, Model> {
     // Subscriber Callback
     private void successRequest(Response<Model> modelResponse) {
         if (getCallback() != null) {
-            getCallback().onSuccess(modelResponse.body(), modelResponse.code());
+            int status = HttpHandleResponseCode.handleResultStatus(modelResponse.code());
+            getCallback().onSuccess(modelResponse.body(), status);
         } else {
             LogUtils.log(LogLevel.ERROR, "BaseMultiRepository Callback Null");
         }

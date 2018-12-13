@@ -3,7 +3,9 @@ package com.yt98.manager.android_builder.base;
 import android.os.Parcelable;
 import android.util.Log;
 
-import com.yt98.manager.android_builder.network.rest.normalRepository.ResponseCallback;
+import com.yt98.manager.android_builder.network.callback.ResponseCallback;
+import com.yt98.manager.android_builder.utils.ClassInfo;
+import com.yt98.manager.android_builder.utils.StateType;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,7 +29,6 @@ import androidx.lifecycle.ViewModel;
  *
  *               model = getViewModel();
  *               model.setView(this);
- *               model.setViewLifeCycle(getRegistry());
  *
  */
 
@@ -51,10 +52,6 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
      */
     private WeakReference<View> viewRef;
 
-    /**
-     * LifeCycleRegistery is a Part Of LifeCycle to tell the ViewModel what is the Status of View or Any UnExpected Exception
-     */
-    private Lifecycle viewLifeCycle;
 
     public BaseViewModel() {
         this.isViewAttached = new AtomicBoolean(false);
@@ -90,25 +87,15 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
         }
     }
 
-    public void setViewLifeCycle(Lifecycle viewLifeCycle) {
-        this.viewLifeCycle = viewLifeCycle;
-    }
-
     @Override
     public void onResume(BaseView view) {
-        if (viewLifeCycle != null) {
-            if (viewLifeCycle.getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
-                setView((View) view);
-            }
+        if(view != null){
+            setView((View) view);
         }
     }
 
     protected boolean getViewStatus() {
         return isViewAttached.get();
-    }
-
-    public Lifecycle getViewLifeCycle() {
-        return viewLifeCycle;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -119,7 +106,15 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
         }
     }
 
+    protected abstract void initialViewModelState(StateType state);
     protected abstract ResponseCallback<Model> getCallback();
+
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        this.onDestroy();
+    }
 
     /**
      * Don't Forget To call onDestroy() for destroy the values from current View

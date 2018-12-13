@@ -1,5 +1,7 @@
 package com.yt98.manager.android_builder.base;
 
+import com.yt98.manager.android_builder.utils.ClassInfo;
+
 import androidx.fragment.app.Fragment;
 
 /**

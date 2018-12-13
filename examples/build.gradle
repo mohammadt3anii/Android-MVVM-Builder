@@ -24,6 +24,9 @@ android {
         targetCompatibility = "${rootProject.targetCompatibilityV}"
     }
 
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {

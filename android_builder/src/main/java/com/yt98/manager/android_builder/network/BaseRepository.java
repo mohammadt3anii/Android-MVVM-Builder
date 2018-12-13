@@ -1,9 +1,14 @@
-package com.yt98.manager.android_builder.network.rest.normalRepository;
+package com.yt98.manager.android_builder.network;
 
 import android.os.Parcelable;
 import android.util.Log;
 
-import com.yt98.manager.android_builder.base.ClassInfo;
+import com.yt98.manager.android_builder.ui.utils.LogUtils;
+import com.yt98.manager.android_builder.utils.ClassInfo;
+import com.yt98.manager.android_builder.network.callback.ResponseCallback;
+import com.yt98.manager.android_builder.utils.LogLevel;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,10 +23,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * BaseRepository root for all classes will send any request to backend and get response using rxJava2
- * @param <Model> the model of the Requests
- * @param <Api> the Service that have the url's and method type
  *
- *             make sure you call destroyRepo() to clear the observable from CompositeDisposable
+ * @param <Model> the model of the Requests
+ * @param <Api>   the Service that have the url's and method type
+ *                <p>
+ *                make sure you call destroyRepo() to clear the observable from CompositeDisposable
  */
 
 @ClassInfo(
@@ -29,10 +35,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
         created = "11/11/2018",
         createdBy = "Yazan98"
 )
-public abstract class BaseRepository<Model extends Parcelable , Api> {
+public abstract class BaseRepository<Model extends Parcelable, Api> {
 
     public static final String TAG = "BaseRepository";
 
+    private ResponseCallback<List<Model>> listCallback;
     private ResponseCallback<Model> callback;
     private CompositeDisposable compositeDisposable;
     private HttpLoggingInterceptor interceptor;
@@ -60,17 +67,43 @@ public abstract class BaseRepository<Model extends Parcelable , Api> {
 
     /**
      * This Method Here Add The Observable to {@CompositeDisposable} to Add it and Subscribe The Api Request
+     *
      * @param observable
      */
-    public void addObservableToComposit(Observable<Response<Model>> observable) {
+    public void addRequest(Observable<Response<Model>> observable) {
         this.compositeDisposable.add(getReactiveObservable(observable).subscribe(
                 this::onSuccessResponse,
                 this::onErrorResponse
         ));
     }
 
+    public void addListRequest(Observable<Response<List<Model>>> observable) {
+        this.compositeDisposable.add(getReactiveList(observable).subscribe(
+                this::onSuccessListResponse,
+                this::onErrorListResponse
+        ));
+    }
+
+    private void onErrorListResponse(Throwable throwable) {
+        if (getListCallback() != null) {
+            getListCallback().onError(throwable);
+        } else {
+            LogUtils.log(LogLevel.ERROR, " List Request Callback Null");
+        }
+    }
+
+    private void onSuccessListResponse(Response<List<Model>> listResponse) {
+        if (getListCallback() != null) {
+            int status = HttpHandleResponseCode.handleResultStatus(listResponse.code());
+            getListCallback().onSuccess(listResponse.body(), status);
+        } else {
+            LogUtils.log(LogLevel.ERROR, " List Request Callback Null");
+        }
+    }
+
     /**
      * Handle the {@Throwable} from The Request if it throws an a Exception
+     *
      * @param throwable
      */
     private void onErrorResponse(Throwable throwable) {
@@ -83,13 +116,20 @@ public abstract class BaseRepository<Model extends Parcelable , Api> {
 
     private void onSuccessResponse(Response<Model> modelResponse) {
         if (callback != null) {
-            callback.onSuccess(modelResponse.body(), modelResponse.code());
+            int status = HttpHandleResponseCode.handleResultStatus(modelResponse.code());
+            callback.onSuccess(modelResponse.body(), status);
         } else {
             Log.e(TAG, " Callback in onSuccess Null");
         }
     }
 
     private Observable<Response<Model>> getReactiveObservable(Observable<Response<Model>> observable) {
+        return observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private Observable<Response<List<Model>>> getReactiveList(Observable<Response<List<Model>>> observable) {
         return observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -109,6 +149,14 @@ public abstract class BaseRepository<Model extends Parcelable , Api> {
 
     public Retrofit getRetrofit() {
         return retrofit;
+    }
+
+    public void setListCallback(ResponseCallback<List<Model>> listCallback) {
+        this.listCallback = listCallback;
+    }
+
+    public ResponseCallback<List<Model>> getListCallback() {
+        return listCallback;
     }
 
     public ResponseCallback<Model> getCallback() {

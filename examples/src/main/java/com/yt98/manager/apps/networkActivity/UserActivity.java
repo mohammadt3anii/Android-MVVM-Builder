@@ -9,21 +9,22 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.yt98.manager.android_builder.base.BaseView;
+import com.yt98.manager.android_builder.utils.StateType;
 import com.yt98.manager.android_builder.ui.activity.BaseNetworkActivity;
 import com.yt98.manager.apps.R;
 import com.yt98.manager.apps.networkActivity.data.UserModel;
 
 import javax.inject.Inject;
 
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.ViewModelProviders;
 
-public class UserActivity extends BaseNetworkActivity<UserView , UserModel, UserViewModel> implements UserView {
+public class UserActivity extends BaseNetworkActivity<UserView, UserModel, UserViewModel> implements UserView {
 
     @Inject
     UserViewModel model;
-    private LifecycleRegistry registry;
 
     private ProgressBar loader;
     private ImageView image;
@@ -34,10 +35,6 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
-
-        registry = new LifecycleRegistry(this);
-        registry.markState(Lifecycle.State.CREATED);
-
 
         /**
          * Replace This with Butterknife or DataBinding
@@ -50,23 +47,24 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         if (model == null) {
             model = getViewModel();
             model.setView(this);
-            model.setViewLifeCycle(getRegistry());
         }
 
         model.getUser().observe(this, user -> {
-            name.setText(user.getName());
-            bio.setText(user.getBio());
-            Picasso.get()
-                    .load(user.getAvatarUrl())
-                    .into(image);
+
+            Toast.makeText(this, "Observing Data...", Toast.LENGTH_SHORT).show();
+            if (model.getUser().getValue() == null) {
+                model.getUserInfo(StateType.CURRENT_STATE);
+            } else {
+                name.setText(user.getName());
+                bio.setText(user.getBio());
+                Picasso.get()
+                        .load(user.getAvatarUrl())
+                        .into(image);
+            }
         });
 
-
-        /**
-         * Here The View Tell ViewModel To Start Get User Info
-         */
-        if(model != null){
-            model.getUserInfo();
+        if (model.getUser().getValue() == null) {
+           model.initialViewModelState(StateType.INITIAL_STATE);
         }
     }
 
@@ -78,16 +76,11 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         }
     }
 
-    public LifecycleRegistry getRegistry() {
-        return registry;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        registry.markState(Lifecycle.State.RESUMED);
         if (model != null) {
-            model.onResume((UserView) reAttachView());
+            model.onResume(reAttachView());
         }
     }
 
@@ -99,11 +92,17 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
     @Override
     public void showLoading() {
         loader.setVisibility(View.VISIBLE);
+        name.setVisibility(View.GONE);
+        image.setVisibility(View.GONE);
+        bio.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
         loader.setVisibility(View.GONE);
+        name.setVisibility(View.VISIBLE);
+        image.setVisibility(View.VISIBLE);
+        bio.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -130,4 +129,7 @@ public class UserActivity extends BaseNetworkActivity<UserView , UserModel, User
         return ViewModelProviders.of(this).get(UserViewModel.class);
     }
 
+    public void refresh(View view) {
+            model.getUserInfo(StateType.NEW_STATE);
+    }
 }

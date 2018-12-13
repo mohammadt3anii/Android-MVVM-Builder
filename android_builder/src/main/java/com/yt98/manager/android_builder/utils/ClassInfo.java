@@ -1,4 +1,4 @@
-package com.yt98.manager.android_builder.base;
+package com.yt98.manager.android_builder.utils;
 
 public @interface ClassInfo {
 

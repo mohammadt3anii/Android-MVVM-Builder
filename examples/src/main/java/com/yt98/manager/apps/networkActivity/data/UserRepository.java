@@ -1,6 +1,6 @@
 package com.yt98.manager.apps.networkActivity.data;
 
-import com.yt98.manager.android_builder.network.rest.normalRepository.BaseRepository;
+import com.yt98.manager.android_builder.network.BaseRepository;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ public class UserRepository extends BaseRepository<UserModel, UserApi> {
     }
 
     public void getUserInfo(){
-        addObservableToComposit(getUserObservable());
+        addRequest(getUserObservable());
     }
 
     @Override
