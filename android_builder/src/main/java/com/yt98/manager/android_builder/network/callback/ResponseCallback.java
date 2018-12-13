@@ -7,6 +7,7 @@ import com.yt98.manager.android_builder.utils.ResponseStatus;
 
 /**
  * BaseCallback for Any Request
+ *
  * @param <Model>
  */
 
@@ -17,7 +18,7 @@ import com.yt98.manager.android_builder.utils.ResponseStatus;
 )
 public interface ResponseCallback<Model> {
 
-    void onSuccess(Model content ,@ResponseStatus Integer status);
+    void onSuccess(Model content, @ResponseStatus Integer status);
 
     void onError(Throwable throwable);
 

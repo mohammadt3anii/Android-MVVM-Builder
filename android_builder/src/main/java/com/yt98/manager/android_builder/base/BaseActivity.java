@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 /**
  * This Class is the Root For the Activities that support MVVM Library
- *
+ * <p>
  * just Support AndroidX
  */
 
@@ -39,7 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public static void showLoader(Context activity , String title , boolean isCancelable) {
+    public static void showLoader(Context activity, String title, boolean isCancelable) {
         if (dialog == null) {
             dialog = new ProgressDialog(activity);
             dialog.setMessage(title);

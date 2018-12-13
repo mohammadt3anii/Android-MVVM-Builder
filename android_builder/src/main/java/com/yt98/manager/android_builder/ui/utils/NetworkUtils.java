@@ -1,7 +1,6 @@
 package com.yt98.manager.android_builder.ui.utils;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;

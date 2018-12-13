@@ -12,6 +12,7 @@ import io.reactivex.Flowable;
 
 /**
  * Base Data Access Object for Room
+ *
  * @param <E> Entity
  */
 

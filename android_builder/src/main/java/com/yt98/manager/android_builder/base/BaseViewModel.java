@@ -19,17 +19,16 @@ import androidx.lifecycle.ViewModel;
  * RootViewModel for any ViewModel in the Project to include the status of {@BaseView}
  * Manage the ViewModel
  *
- * @param <View> for each Screen
+ * @param <View>  for each Screen
  * @param <Model> for each ViewModel
- *
- *               make sure you send the {@BaseView} to ViewModel to handle the Operations between view and model
- *               also send the {@Lifecycle} for each View to tell the ViewModel what is the status of his View
- *
- *               the initialize for the ViewModel like this
- *
- *               model = getViewModel();
- *               model.setView(this);
- *
+ *                <p>
+ *                make sure you send the {@BaseView} to ViewModel to handle the Operations between view and model
+ *                also send the {@Lifecycle} for each View to tell the ViewModel what is the status of his View
+ *                <p>
+ *                the initialize for the ViewModel like this
+ *                <p>
+ *                model = getViewModel();
+ *                model.setView(this);
  */
 
 @ClassInfo(
@@ -89,7 +88,7 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
 
     @Override
     public void onResume(BaseView view) {
-        if(view != null){
+        if (view != null) {
             setView((View) view);
         }
     }
@@ -107,6 +106,7 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
     }
 
     protected abstract void initialViewModelState(StateType state);
+
     protected abstract ResponseCallback<Model> getCallback();
 
 

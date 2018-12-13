@@ -1,10 +1,10 @@
 package com.yt98.manager.android_builder.network;
 
 
-import com.yt98.manager.android_builder.utils.ClassInfo;
 import com.yt98.manager.android_builder.network.callback.MultiRepositoryCallback;
-import com.yt98.manager.android_builder.utils.LogLevel;
 import com.yt98.manager.android_builder.ui.utils.LogUtils;
+import com.yt98.manager.android_builder.utils.ClassInfo;
+import com.yt98.manager.android_builder.utils.LogLevel;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

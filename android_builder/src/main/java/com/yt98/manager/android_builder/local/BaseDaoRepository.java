@@ -56,7 +56,7 @@ public class BaseDaoRepository<E> {
 
     public void deleteContent(E content) {
         if (manager != null) {
-            Disposable deleteContentDisposable =  manager
+            Disposable deleteContentDisposable = manager
                     .deleteContent(content)
                     .subscribe();
             compositeDisposable.add(deleteContentDisposable);
@@ -65,7 +65,7 @@ public class BaseDaoRepository<E> {
 
     public void insertContent(E content) {
         if (manager != null) {
-            Disposable insertDisposable =  manager
+            Disposable insertDisposable = manager
                     .insertContent(content)
                     .subscribe();
             compositeDisposable.add(insertDisposable);

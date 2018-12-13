@@ -41,14 +41,14 @@ public class DaoManager<E> {
     }
 
     public Flowable<Void> insertContent(E content) {
-            return dao.insertContent(content)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
+        return dao.insertContent(content)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Flowable<Void> deleteContent(E content) {
-            return dao.deleteContent(content)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
+        return dao.deleteContent(content)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

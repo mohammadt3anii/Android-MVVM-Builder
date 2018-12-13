@@ -14,7 +14,7 @@ import androidx.lifecycle.LifecycleOwner;
         created = "11/11/2018",
         createdBy = "Yazan98"
 )
-public abstract class BaseNetworkActivity<View extends BaseView , Model extends Parcelable, VM extends BaseViewModel<View, Model>>
+public abstract class BaseNetworkActivity<View extends BaseView, Model extends Parcelable, VM extends BaseViewModel<View, Model>>
         extends BaseActivity implements LifecycleOwner {
 
     /**

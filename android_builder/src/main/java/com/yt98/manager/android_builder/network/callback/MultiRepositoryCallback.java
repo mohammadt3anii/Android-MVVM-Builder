@@ -4,7 +4,7 @@ import com.yt98.manager.android_builder.utils.ResponseStatus;
 
 public interface MultiRepositoryCallback<Body> {
 
-    void onSuccess(Body content,@ResponseStatus Integer status);
+    void onSuccess(Body content, @ResponseStatus Integer status);
 
     void onError(Throwable throwable);
 

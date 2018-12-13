@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 
 /**
  * This Class is the Root For the Fragments that support MVVM Library
- *
+ * <p>
  * just Support AndroidX
  */
 
@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
         createdBy = "Yazan98"
 )
 public abstract class BaseFragment extends Fragment {
-
 
 
     protected abstract int getLayoutRes();

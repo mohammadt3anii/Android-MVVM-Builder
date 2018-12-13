@@ -3,9 +3,9 @@ package com.yt98.manager.android_builder.network;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.yt98.manager.android_builder.network.callback.ResponseCallback;
 import com.yt98.manager.android_builder.ui.utils.LogUtils;
 import com.yt98.manager.android_builder.utils.ClassInfo;
-import com.yt98.manager.android_builder.network.callback.ResponseCallback;
 import com.yt98.manager.android_builder.utils.LogLevel;
 
 import java.util.List;
