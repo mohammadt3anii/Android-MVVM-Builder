@@ -1,7 +1,8 @@
 ![mvvm_logo](https://user-images.githubusercontent.com/29167110/49944214-c9479680-fe9e-11e8-960f-1d7ec51b22f0.jpg)
 
 
-# Android MVVM Builder
+# Android MVVM Builder [![](https://jitpack.io/v/Yazan98/Android-MVVM-Builder.svg)](https://jitpack.io/#Yazan98/Android-MVVM-Builder)
+
 
 Android MVVM Builder the builder library to make your application easier to build based ob Retrofit , RxJava2, Dagger2, ViewModel, LifeCycle and this library will manage your application 
 
@@ -40,6 +41,24 @@ Android MVVM Builder the builder library to make your application easier to buil
 	        implementation "com.github.Yazan98:Android-MVVM-Builder:0.0.1"
 	}
     
+```
+
+```
+Maven
+
+<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
+	<dependency>
+	    <groupId>com.github.Yazan98</groupId>
+	    <artifactId>Android-MVVM-Builder</artifactId>
+	    <version>0.0.1</version>
+	</dependency>
+
 ```
 
 # Let's see an Real Example of how This library Works.
