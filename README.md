@@ -31,14 +31,14 @@ Android MVVM Builder the builder library to make your application easier to buil
 ```
     build.gradle
 
-    allprojects {
+    	allprojects {
 		repositories {
 			maven { url 'https://jitpack.io' }
 		}
 	}
     
-    dependencies {
-	        implementation "com.github.Yazan98:Android-MVVM-Builder:0.0.1"
+    	dependencies {
+		implementation "com.github.Yazan98:Android-MVVM-Builder:0.0.1"
 	}
     
 ```
@@ -46,7 +46,7 @@ Android MVVM Builder the builder library to make your application easier to buil
 ```
 Maven
 
-<repositories>
+	<repositories>
 		<repository>
 		    <id>jitpack.io</id>
 		    <url>https://jitpack.io</url>
@@ -54,9 +54,9 @@ Maven
 	</repositories>
 	
 	<dependency>
-	    <groupId>com.github.Yazan98</groupId>
-	    <artifactId>Android-MVVM-Builder</artifactId>
-	    <version>0.0.1</version>
+	    	<groupId>com.github.Yazan98</groupId>
+	    	<artifactId>Android-MVVM-Builder</artifactId>
+	    	<version>0.0.1</version>
 	</dependency>
 
 ```
