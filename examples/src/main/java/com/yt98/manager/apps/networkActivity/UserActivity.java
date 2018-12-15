@@ -64,7 +64,7 @@ public class UserActivity extends BaseNetworkActivity<UserView, UserModel, UserV
         });
 
         if (model.getUser().getValue() == null) {
-           model.initialViewModelState(StateType.INITIAL_STATE);
+           model.initialAction(StateType.INITIAL_STATE);
         }
     }
 
@@ -130,6 +130,6 @@ public class UserActivity extends BaseNetworkActivity<UserView, UserModel, UserV
     }
 
     public void refresh(View view) {
-            model.getUserInfo(StateType.NEW_STATE);
+            model.getUserInfo(StateType.REFRESH_STATE);
     }
 }

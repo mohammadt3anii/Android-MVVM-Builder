@@ -1,5 +1,7 @@
 package com.yt98.manager.apps.networkActivity.data;
 
+import android.content.Context;
+
 import com.yt98.manager.android_builder.network.BaseRepository;
 
 import javax.inject.Inject;

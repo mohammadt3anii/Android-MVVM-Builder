@@ -12,9 +12,7 @@ public abstract class HttpHandleResponseCode {
             responseStatus = ResponseStatus.SUCCESS;
         } else if (status == CommonHttpCodes.BAD_REQUEST_CODE) {
             responseStatus = ResponseStatus.BAD_REQUEST;
-        } else if (status == CommonHttpCodes.UNAUTHENTICATED_CODE) {
-            responseStatus = ResponseStatus.UNAUTHENTICATED_ERROR;
-        } else if (status == CommonHttpCodes.FORBIDDEN_CODE) {
+        }  else if (status == CommonHttpCodes.FORBIDDEN_CODE) {
             responseStatus = ResponseStatus.FORBIDDEN;
         } else if (status == CommonHttpCodes.NOT_FOUND_CODE) {
             responseStatus = ResponseStatus.NOT_FOUND;

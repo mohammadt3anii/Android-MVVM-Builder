@@ -1,8 +1,8 @@
 package com.yt98.manager.apps.networkActivity;
 
 import com.yt98.manager.android_builder.base.BaseViewModel;
-import com.yt98.manager.android_builder.utils.StateType;
 import com.yt98.manager.android_builder.network.callback.ResponseCallback;
+import com.yt98.manager.android_builder.utils.StateType;
 import com.yt98.manager.apps.networkActivity.dagger.DaggerUserComponent;
 import com.yt98.manager.apps.networkActivity.dagger.UserComponent;
 import com.yt98.manager.apps.networkActivity.dagger.UserRepoModule;
@@ -26,8 +26,8 @@ public class UserViewModel extends BaseViewModel<UserView, UserModel> {
     }
 
     @Override
-    protected void initialViewModelState(StateType state) {
-        if(state == StateType.INITIAL_STATE){
+    protected void initialAction(StateType state) {
+        if (state == StateType.INITIAL_STATE) {
             sendGetUserRequest();
         }
     }
@@ -40,11 +40,12 @@ public class UserViewModel extends BaseViewModel<UserView, UserModel> {
             }
         } else if (state == StateType.NEW_STATE) {
             sendGetUserRequest();
+        } else if (state == StateType.REFRESH_STATE) {
+            sendGetUserRequest();
         }
-
     }
 
-    private void sendGetUserRequest(){
+    private void sendGetUserRequest() {
         if (getViewStatus()) {
             getView().showLoading();
         }

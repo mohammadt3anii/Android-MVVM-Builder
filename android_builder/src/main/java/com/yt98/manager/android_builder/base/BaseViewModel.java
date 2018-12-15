@@ -3,6 +3,7 @@ package com.yt98.manager.android_builder.base;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.yt98.manager.android_builder.exception.ViewNotAttatchedException;
 import com.yt98.manager.android_builder.network.callback.ResponseCallback;
 import com.yt98.manager.android_builder.utils.ClassInfo;
 import com.yt98.manager.android_builder.utils.StateType;
@@ -74,7 +75,6 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
         if (viewRef != null) {
             return viewRef.get();
         } else {
-            Log.e(TAG, " View Not Attached");
             return null;
         }
     }
@@ -105,7 +105,7 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
         }
     }
 
-    protected abstract void initialViewModelState(StateType state);
+    protected abstract void initialAction(StateType state);
 
     protected abstract ResponseCallback<Model> getCallback();
 

@@ -4,5 +4,6 @@ public enum StateType {
     CURRENT_STATE,
     NEW_STATE,
     INITIAL_STATE,
-    DESTROYED_STATE
+    DESTROYED_STATE,
+    REFRESH_STATE
 }
