@@ -10,12 +10,12 @@ import com.yt98.manager.android_builder.utils.ClassInfo;
 import androidx.lifecycle.LifecycleOwner;
 
 @ClassInfo(
-        version = 1,
+        version = 2,
         created = "11/11/2018",
         createdBy = "Yazan98"
 )
 public abstract class BaseNetworkFragment<View extends BaseView, Model extends Parcelable, VM extends BaseViewModel<View, Model>>
-        extends BaseFragment implements LifecycleOwner {
+        extends BaseFragment implements LifecycleOwner , BaseView {
 
 
     /**
