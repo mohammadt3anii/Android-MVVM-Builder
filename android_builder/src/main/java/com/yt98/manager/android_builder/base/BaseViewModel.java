@@ -1,20 +1,17 @@
 package com.yt98.manager.android_builder.base;
 
 import android.os.Parcelable;
-import android.util.Log;
-
-import com.yt98.manager.android_builder.exception.ViewNotAttatchedException;
-import com.yt98.manager.android_builder.network.callback.ResponseCallback;
-import com.yt98.manager.android_builder.utils.ClassInfo;
-import com.yt98.manager.android_builder.utils.StateType;
-
-import java.lang.ref.WeakReference;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import androidx.annotation.UiThread;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
+
+import com.yt98.manager.android_builder.network.callback.ResponseCallback;
+import com.yt98.manager.android_builder.utils.ClassInfo;
+import com.yt98.manager.android_builder.utils.StateType;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * RootViewModel for any ViewModel in the Project to include the status of {@BaseView}
@@ -50,7 +47,7 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
     /**
      * Save the View in WeakReference to save the View from Memory Leaks
      */
-    private WeakReference<View> viewRef;
+    private View view;
 
 
     public BaseViewModel() {
@@ -64,7 +61,7 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
      */
     @UiThread
     public void setView(View view) {
-        this.viewRef = new WeakReference<>(view);
+        this.view = view;
         if (this.isViewAttached != null) {
             changeViewStatus(true);
         }
@@ -72,8 +69,8 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
 
     @UiThread
     public View getView() {
-        if (viewRef != null) {
-            return viewRef.get();
+        if (view != null) {
+            return view;
         } else {
             return null;
         }
@@ -97,14 +94,6 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
         return isViewAttached.get();
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    @Override
-    public void onStop() {
-        if (viewRef != null) {
-            viewRef.clear();
-        }
-    }
-
     protected abstract void initialAction(StateType state);
 
     protected abstract ResponseCallback<Model> getCallback();
@@ -122,9 +111,8 @@ public abstract class BaseViewModel<View extends BaseView, Model extends Parcela
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     @Override
     public void onDestroy() {
-        if (viewRef != null) {
-            viewRef.clear();
-            viewRef = null;
+        if (view != null) {
+            view = null;
         }
     }
 }
